@@ -2,7 +2,7 @@
 //  MovieDetailsController.swift
 //  Movie App
 //
-//  Created by Nitin Patil on 07/01/21.
+//  Created by Nitin Patil on 17/02/21.
 //
 
 import UIKit
@@ -96,9 +96,15 @@ class MovieDetailsController: UIViewController {
             return
         }
         titleLabel.text = movieDetails.getTitle()?.capitalized
-        releaseDateLbl.text = "Released date: \(movieDetails.getDate() as! String)"
+        if let date = movieDetails.getDate() as? String{
+            releaseDateLbl.text = "Released date: \(date)"
+        }
         infoTv.text = movieDetails.getOverview()
-        let imgUrl = URL(string: movieDetails.getPosterPath()!)
-        cardImage.loadImage(imageUrl: imgUrl!)
+        if let str = movieDetails.getPosterPath(){
+            let imgUrl = URL(string: str)!
+            cardImage.loadImage(imageUrl: imgUrl)
+        }else{
+            cardImage.image = UIImage(named: "rill.png")
+        }
     }
 }

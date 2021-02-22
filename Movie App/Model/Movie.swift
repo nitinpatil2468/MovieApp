@@ -2,7 +2,7 @@
 //  Movies.swift
 //  Movie App
 //
-//  Created by Nitin Patil on 07/01/21.
+//  Created by Nitin Patil on 17/02/21.
 //
 
 import Foundation
@@ -23,10 +23,31 @@ class Movie {
    }
 
     func createModel(){
-        self.setTitle(self.movieInfo?["title"] as! String)
-        self.setPosterPath(self.movieInfo?["poster_path"] as! String)
-        self.setOverview(self.movieInfo?["overview"] as! String)
-        self.setDate(self.movieInfo?["release_date"] as! String)
+        
+        print(self.movieInfo)
+        
+        if let title = self.movieInfo?["title"] as? String{
+            self.setTitle(title)
+        }
+        
+        if let path = self.movieInfo?["poster_path"] as? String{
+            self.setPosterPath(path)
+
+        }
+        
+        if let overView = self.movieInfo?["overview"] as? String{
+            self.setOverview(overView)
+
+        }
+        
+        if let date = self.movieInfo?["release_date"] as? String{
+            self.setDate(date)
+
+        }
+        
+        
+        
+        
     }
 
     func setEntries(_ Entries:[Movie]){
@@ -65,20 +86,20 @@ class Movie {
 
    public func getDate()->String?{
 
-       return releaseDate!;
+       return releaseDate;
    }
 
    public func getTitle()->String?{
 
-       return Title!;
+       return Title;
    }
    
    public func getOverview()->String?{
 
-       return Overview!;
+       return Overview;
    }
     public func getPosterPath()->String?{
 
-       return PosterPath!;
+       return PosterPath;
    }
 }

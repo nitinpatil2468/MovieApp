@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94365D3125DD5E8900689549 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94365D3025DD5E8900689549 /* MainTabController.swift */; };
+		94365D3525DD7D9400689549 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94365D3425DD7D9400689549 /* SearchController.swift */; };
 		947A78EB25A831660098B7D3 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947A78EA25A831660098B7D3 /* Constant.swift */; };
 		949E035A25A7228B0003DD6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E035925A7228B0003DD6A /* AppDelegate.swift */; };
 		949E035C25A7228B0003DD6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E035B25A7228B0003DD6A /* SceneDelegate.swift */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		6EBDA5271D817056DB5E417C /* Pods-Movie App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie App.release.xcconfig"; path = "Target Support Files/Pods-Movie App/Pods-Movie App.release.xcconfig"; sourceTree = "<group>"; };
 		89888BF850AE6B270DD3A74C /* Pods-Movie App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie App.debug.xcconfig"; path = "Target Support Files/Pods-Movie App/Pods-Movie App.debug.xcconfig"; sourceTree = "<group>"; };
+		94365D3025DD5E8900689549 /* MainTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		94365D3425DD7D9400689549 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		947A78EA25A831660098B7D3 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		949E035625A7228B0003DD6A /* Movie App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		949E035925A7228B0003DD6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +99,9 @@
 			isa = PBXGroup;
 			children = (
 				94A91B8D25A87D2D00372731 /* MovieDetailsController.swift */,
+				94365D3025DD5E8900689549 /* MainTabController.swift */,
 				949E035D25A7228B0003DD6A /* HomeController.swift */,
+				94365D3425DD7D9400689549 /* SearchController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -271,6 +277,8 @@
 			files = (
 				94A91B8B25A8700500372731 /* LazyImageView.swift in Sources */,
 				94A91B8E25A87D2D00372731 /* MovieDetailsController.swift in Sources */,
+				94365D3125DD5E8900689549 /* MainTabController.swift in Sources */,
+				94365D3525DD7D9400689549 /* SearchController.swift in Sources */,
 				949E035E25A7228B0003DD6A /* HomeController.swift in Sources */,
 				949E035A25A7228B0003DD6A /* AppDelegate.swift in Sources */,
 				949E037425A742DA0003DD6A /* MovieCell.swift in Sources */,

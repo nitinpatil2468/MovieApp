@@ -2,7 +2,7 @@
 //  MovieCell.swift
 //  Movie App
 //
-//  Created by Nitin Patil on 07/01/21.
+//  Created by Nitin Patil on 17/02/21.
 //
 
 import UIKit
@@ -62,8 +62,11 @@ class MovieCell: UICollectionViewCell {
     
     func manageData(){
         guard let data = data else {return}
-        let url = URL(string:data.getPosterPath()!)
-        cardImage.loadImage(imageUrl: url!)
+        if let url = URL(string:data.getPosterPath() ?? ""){
+            cardImage.loadImage(imageUrl: url)
+        }else{
+            cardImage.image = UIImage(named: "rill.png")
+        }
         label.text = data.getTitle()
     }
 }

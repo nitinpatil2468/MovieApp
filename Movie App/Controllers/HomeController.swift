@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Movie App
 //
-//  Created by Nitin Patil on 07/01/21.
+//  Created by Nitin Patil on 17/02/21.
 //
 
 import UIKit
@@ -47,6 +47,9 @@ class HomeController: UIViewController {
     
     var MoviesList = [Movie]()
     var filterOption = "now_playing"
+    var pages : Int = 1
+    
+    
 
     
     
@@ -62,6 +65,7 @@ class HomeController: UIViewController {
     }
     
     func configureUI(){
+
         
         navigationController?.navigationBar.isHidden = true
         self.view.addSubview(TitleLabel)
@@ -78,24 +82,28 @@ class HomeController: UIViewController {
     @objc func showOptions(){
         let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Now Playing", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.MoviesList.removeAll()
             self.filterOption = "now_playing"
             self.filterButton.setTitle("Now Playing", for: .normal)
             self.fetchMoreDetails()
         }))
         
         alert.addAction(UIAlertAction(title: "Popular", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.MoviesList.removeAll()
             self.filterOption = "popular"
             self.filterButton.setTitle("Popular", for: .normal)
             self.fetchMoreDetails()
         }))
         
         alert.addAction(UIAlertAction(title: "Top Rated", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.MoviesList.removeAll()
             self.filterOption = "top_rated"
             self.filterButton.setTitle("Top Rated", for: .normal)
             self.fetchMoreDetails()
         }))
         
         alert.addAction(UIAlertAction(title: "Upcoming", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.MoviesList.removeAll()
             self.filterOption = "upcoming"
             self.filterButton.setTitle("Upcoming", for: .normal)
             self.fetchMoreDetails()
@@ -126,13 +134,18 @@ extension HomeController : UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView,
                            layout collectionViewLayout: UICollectionViewLayout,
                            sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 3 - 50 / 3
-        return CGSize(width: width, height: width)
+        let width = collectionView.bounds.width
+        return CGSize(width: width / 2 - 2, height: width / 2 - 2)
         
     }
     
-    internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -145,23 +158,34 @@ extension HomeController : UICollectionViewDelegate,UICollectionViewDataSource,U
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+         if (indexPath.row == MoviesList.count - 1 ) { //it's your last cell
+           //Load more data & reload your collection view
+            pages = pages + 1
+            fetchMoreDetails()
+         }
+    }
+    
     func fetchMoreDetails() {
         
-        let APIRequest = "https://api.themoviedb.org/3/movie/\(filterOption)?api_key=\(Constant.APIKey)"
+        print("pages:\(pages)")
+
+        
+        let APIRequest = "https://api.themoviedb.org/3/movie/\(filterOption)?api_key=\(Constant.APIKey)&page=\(pages)"
         let url = URL(string: APIRequest)
         
-        MoviesList.removeAll()
         
         NetworkRequestHandler.shared.GET(url:url!, completion: {(responseString , error) in
             if let xmlString = responseString{
-                let array = xmlString["results"] as? [[AnyHashable : Any]]
-                
-                for dict in array!{
-                    let v = Movie(_dict: dict)
-                    self.MoviesList.append(v)
+                if let array = xmlString["results"] as? [[AnyHashable : Any]]{
+                    for dict in array{
+                        let v = Movie(_dict: dict)
+                        self.MoviesList.append(v)
+                    }
+                    print("count:\(self.MoviesList.count)")
+
+                    self.collectionView.reloadData()
                 }
-                self.collectionView.reloadData()
-      
             }else if let error = error{
                 print (error.localizedDescription as Any);
 
